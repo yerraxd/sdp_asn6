@@ -30,4 +30,8 @@ public final class DirectoryNode extends Node {
     public boolean isEmpty() {
         return children.isEmpty();
     }
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

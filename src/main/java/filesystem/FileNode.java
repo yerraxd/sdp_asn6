@@ -14,4 +14,9 @@ public final class FileNode extends Node {
     public long sizeInBytes() {
         return sizeInBytes;
     }
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
 }
