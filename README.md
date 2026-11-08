@@ -38,3 +38,36 @@ or their `accept` methods. A new visitor is cheap. A new element type is expensi
 
 `DoubleDispatchTest`, `TreeIntegrityTest`, `TotalSizeVisitorTest`, `SearchVisitorTest`,
 `StatisticsVisitorTest`, `VisitorStateTest` cover checkpoints T1 to T8.
+
+## Sample output
+
+`mvn -q compile exec:java` on the demo tree built in `App`:
+
+```
+Total size: 13900 bytes
+Java files >= 1000 bytes:
+  src/main/App.java
+  src/test/AppTest.java
+Files: 6, directories: 6, max depth: 3
+```
+
+Demo tree (sizes in bytes):
+
+```
+project
+├── README.md (1200)
+├── pom.xml (2100)
+├── src
+│   ├── main
+│   │   ├── App.java (3400)
+│   │   └── Util.java (900)
+│   └── test
+│       └── AppTest.java (1800)
+├── docs
+│   └── design.md (4500)
+└── target (empty)
+```
+
+`Util.java` is excluded from the search because 900 < 1000. `target` is an empty directory:
+it counts as a directory and adds no bytes. The deepest node is `App.java` at depth 3
+(project = 0, src = 1, main = 2, App.java = 3).
