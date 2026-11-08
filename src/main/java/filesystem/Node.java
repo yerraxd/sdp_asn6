@@ -1,7 +1,9 @@
 package filesystem;
 
+import java.util.Optional;
 public abstract class Node implements Element {
     private final String name;
+    private DirectoryNode parent;
 
     protected Node(String name) {
         this.name = requireValidName(name);
@@ -20,5 +22,17 @@ public abstract class Node implements Element {
     @Override
     public String name() {
         return name;
+    }
+
+    public Optional<DirectoryNode> parent() {
+        return Optional.ofNullable(parent);
+    }
+
+    DirectoryNode parentOrNull() {
+        return parent;
+    }
+
+    void setParent(DirectoryNode parent) {
+        this.parent = parent;
     }
 }
